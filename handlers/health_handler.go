@@ -11,7 +11,7 @@ import (
 func HealthHandler(r *gin.RouterGroup) {
 
 	r.GET("/", func(c *gin.Context) {
-		healthResponse := response.HealthResponse{
+		healthResponse := response.THealthResponse{
 			Message: "OK",
 		}
 

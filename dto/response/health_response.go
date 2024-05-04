@@ -1,5 +1,5 @@
 package response
 
-type HealthResponse struct {
+type THealthResponse struct {
 	Message string `json:"message"`
 }

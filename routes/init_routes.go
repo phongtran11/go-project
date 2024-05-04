@@ -28,4 +28,7 @@ func initRoutesWithEngine(engine *gin.Engine) {
 
 	health := v1.Group("/health")
 	handlers.HealthHandler(health)
+
+	auth := v1.Group("/auth")
+	handlers.AuthHandler(auth)
 }

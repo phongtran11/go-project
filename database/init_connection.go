@@ -3,15 +3,16 @@ package database
 import (
 	"fmt"
 
+	"github.com/phongtran11/go-project/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-type DatabaseStore struct {
+type TDatabaseStore struct {
 	DB *gorm.DB
 }
 
-var databaseStore DatabaseStore
+var databaseStore TDatabaseStore
 
 func ConnectDB() {
 	db, err := gorm.Open(mysql.New(mysql.Config{
@@ -30,6 +31,9 @@ func ConnectDB() {
 	databaseStore.DB = db
 
 	fmt.Print("Connect to database successfully\n")
+
+	// Enable automatic migrations
+	db.AutoMigrate(&models.TUser{})
 }
 
 func GetDB() *gorm.DB {
