@@ -1,11 +1,11 @@
 package models
 
-type TUser struct {
-	TBaseModel
+type User struct {
+	BaseModel
 
-	FirstName string `gorm:"type:string;size:15;null"`
+	FirstName string `gorm:"type:string;size:15;null;default:null"`
 
-	LastName string `gorm:"type:string;size:25;null"`
+	LastName string `gorm:"type:string;size:25;null;default:null"`
 
 	Email string `gorm:"type:string;size:64;not null;unique"`
 

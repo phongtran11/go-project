@@ -1,0 +1,17 @@
+POST http://localhost:3000/api/v1/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "phong3",
+    "password": "test"
+}
+
+######
+
+POST http://localhost:3000/api/v1/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "email": "phong3",
+    "password": "test"
+}

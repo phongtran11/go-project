@@ -33,7 +33,7 @@ func ConnectDB() {
 	fmt.Print("Connect to database successfully\n")
 
 	// Enable automatic migrations
-	db.AutoMigrate(&models.TUser{})
+	db.AutoMigrate(&models.User{})
 }
 
 func GetDB() *gorm.DB {

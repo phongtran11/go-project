@@ -26,9 +26,11 @@ func initRoutesWithEngine(engine *gin.Engine) {
 	// define version 1 route
 	v1 := api.Group("/v1")
 
+	// health check routes
 	health := v1.Group("/health")
-	handlers.HealthHandler(health)
+	health.GET("", handlers.HealthHandler().Health)
 
+	// auth
 	auth := v1.Group("/auth")
-	handlers.AuthHandler(auth)
+	AuthRoutes(auth)
 }
