@@ -21,16 +21,16 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo "DB_ROOT_PASSWORD=${{GO_PROJECT_DB_ROOT_PASSWORD}}" >> .env   
-          echo "DB_DATABASE=${{GO_PROJECT_DB_DATABASE}}" >> .env   
-          echo "DB_USERNAME=${{GO_PROJECT_DB_USERNAME}}" >> .env   
-          echo "DB_PASSWORD=${{GO_PROJECT_DB_PASSWORD}}" >> .env   
-          echo "DB_HOST=${{GO_PROJECT_DB_HOST}}" >> .env   
-          echo "DB_PORT=${{GO_PROJECT_DB_PORT}}" >> .env   
-          echo "JTW_SECRET_KEY=${{GO_PROJECT_JTW_SECRET_KEY}}" >> .env   
-          echo "JTW_EXPIRATION_TIME=${{GO_PROJECT_JTW_EXPIRATION_TIME}}" >> .env   
-          echo "JTW_REFRESH_SECRET_KEY=${{GO_PROJECT_JTW_REFRESH_SECRET_KEY}}" >> .env   
-          echo "JTW_REFRESH_EXPIRATION_TIME=${{GO_PROJECT_JTW_REFRESH_EXPIRATION_TIME}}" >> .env 
+          echo "DB_ROOT_PASSWORD=${{ secrets.GO_PROJECT_DB_ROOT_PASSWORD }}" >> .env   
+          echo "DB_DATABASE=${{ secrets.GO_PROJECT_DB_DATABASE }}" >> .env   
+          echo "DB_USERNAME=${{ secrets.GO_PROJECT_DB_USERNAME }}" >> .env   
+          echo "DB_PASSWORD=${{ secrets.GO_PROJECT_DB_PASSWORD }}" >> .env   
+          echo "DB_HOST=${{ secrets.GO_PROJECT_DB_HOST }}" >> .env   
+          echo "DB_PORT=${{ secrets.GO_PROJECT_DB_PORT }}" >> .env   
+          echo "JTW_SECRET_KEY=${{ secrets.GO_PROJECT_JTW_SECRET_KEY }}" >> .env   
+          echo "JTW_EXPIRATION_TIME=${{ secrets.GO_PROJECT_JTW_EXPIRATION_TIME }}" >> .env   
+          echo "JTW_REFRESH_SECRET_KEY=${{ secrets.GO_PROJECT_JTW_REFRESH_SECRET_KEY }}" >> .env   
+          echo "JTW_REFRESH_EXPIRATION_TIME=${{ secrets.GO_PROJECT_JTW_REFRESH_EXPIRATION_TIME }}" >> .env 
           cat .env
       - name: Install dependencies
         run: |
