@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/phongtran11/go-project/config"
 	"github.com/phongtran11/go-project/database"
 	"github.com/phongtran11/go-project/models"
 	"github.com/phongtran11/go-project/pkg/constants"
@@ -16,12 +17,14 @@ import (
 type TAuthServices struct {
 	Database     *gorm.DB
 	UserServices *TUserServices
+	AppConfig    *config.TAppConfig
 }
 
 func AuthServices() *TAuthServices {
 	return &TAuthServices{
 		Database:     database.GetDB(),
 		UserServices: UserServices(),
+		AppConfig:    config.GetAppConfig(),
 	}
 }
 
@@ -64,8 +67,8 @@ func (authServices *TAuthServices) Login(request request.TLoginRequest) (*respon
 func (authServices *TAuthServices) generateToken(user models.User) (*response.TTokenResponse, error) {
 	tokenResult := &response.TTokenResponse{}
 
-	tokenResult.AccessTokenExpireTime = time.Now().Add(1440 * time.Minute).Unix()
-	tokenResult.RefreshTokenExpireTime = time.Now().Add(60 * time.Minute).Unix()
+	tokenResult.AccessTokenExpireTime = time.Now().Add(time.Duration(authServices.AppConfig.JTW_EXPIRATION_TIME) * time.Minute).Unix()
+	tokenResult.RefreshTokenExpireTime = time.Now().Add(time.Duration(authServices.AppConfig.JTW_REFRESH_EXPIRATION_TIME) * time.Minute).Unix()
 
 	// Generate access token
 	accessTokenClaim := jwt.MapClaims{}
@@ -77,7 +80,7 @@ func (authServices *TAuthServices) generateToken(user models.User) (*response.TT
 
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, accessTokenClaim)
 
-	accessTokenSigned, err := accessToken.SignedString([]byte("heWhy"))
+	accessTokenSigned, err := accessToken.SignedString([]byte(authServices.AppConfig.JTW_SECRET_KEY))
 
 	tokenResult.AccessToken = accessTokenSigned
 
@@ -93,7 +96,7 @@ func (authServices *TAuthServices) generateToken(user models.User) (*response.TT
 
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshTokenClaim)
 
-	refreshTokenSigned, err := refreshToken.SignedString([]byte("heWhyRefresh"))
+	refreshTokenSigned, err := refreshToken.SignedString([]byte(authServices.AppConfig.JTW_REFRESH_SECRET_KEY))
 
 	if err != nil {
 		return nil, err
