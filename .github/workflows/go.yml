@@ -18,6 +18,20 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21.x'
+
+      - name: Set up secret environment variables
+        run: |
+          echo "DB_ROOT_PASSWORD=$GO_PROJECT_DB_ROOT_PASSWORD" >> $GITHUB_ENV   
+          echo "DB_DATABASE=$GO_PROJECT_DB_DATABASE" >> $GITHUB_ENV   
+          echo "DB_USERNAME=$GO_PROJECT_DB_USERNAME" >> $GITHUB_ENV   
+          echo "DB_PASSWORD=$GO_PROJECT_DB_PASSWORD" >> $GITHUB_ENV   
+          echo "DB_HOST=$GO_PROJECT_DB_HOST" >> $GITHUB_ENV   
+          echo "DB_PORT=$GO_PROJECT_DB_PORT" >> $GITHUB_ENV   
+          echo "JTW_SECRET_KEY=$GO_PROJECT_JTW_SECRET_KEY" >> $GITHUB_ENV   
+          echo "JTW_EXPIRATION_TIME=$GO_PROJECT_JTW_EXPIRATION_TIME" >> $GITHUB_ENV   
+          echo "JTW_REFRESH_SECRET_KEY=$GO_PROJECT_JTW_REFRESH_SECRET_KEY" >> $GITHUB_ENV   
+          echo "JTW_REFRESH_EXPIRATION_TIME=$GO_PROJECT_JTW_REFRESH_EXPIRATION_TIME" >> $GITHUB_ENV   
+            
       - name: Install dependencies
         run: |
-          docker-compose -f ../docker/docker-compose.yml --env-file ../.env  up -d
+          docker-compose -f ../docker/docker-compose.yml up -d
