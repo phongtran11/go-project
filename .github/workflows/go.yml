@@ -17,7 +17,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21.x'
+          go-version: '1.22.x'
       - name: Create env file
         run: |
           touch .env
@@ -32,6 +32,6 @@ jobs:
           echo "JTW_REFRESH_SECRET_KEY=${{ secrets.GO_PROJECT_JTW_REFRESH_SECRET_KEY }}" >> .env   
           echo "JTW_REFRESH_EXPIRATION_TIME=${{ secrets.GO_PROJECT_JTW_REFRESH_EXPIRATION_TIME }}" >> .env 
           cat .env
-      - name: Start containers
-        working-directory: ./app
-        run: docker-compose -f "./docker/docker-compose.yml" up -d
+      - name: Build app
+          run: |
+           go build cmd
