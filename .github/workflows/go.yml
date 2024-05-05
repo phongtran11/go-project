@@ -32,6 +32,5 @@ jobs:
           echo "JTW_REFRESH_SECRET_KEY=${{ secrets.GO_PROJECT_JTW_REFRESH_SECRET_KEY }}" >> .env   
           echo "JTW_REFRESH_EXPIRATION_TIME=${{ secrets.GO_PROJECT_JTW_REFRESH_EXPIRATION_TIME }}" >> .env 
           cat .env
-      - name: Install dependencies
-        run: |
-          cd docker && docker-compose up -d
+      - name: Start containers
+        run: docker-compose -f "./docker/docker-compose.yml" up -d --build
