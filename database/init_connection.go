@@ -16,7 +16,7 @@ var databaseStore TDatabaseStore
 
 func ConnectDB() {
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN:                       "root:root@tcp(localhost:3308)/go_project?charset=utf8&parseTime=True&loc=Local", // data source name
+		DSN:                       "root:root@tcp(localhost:3306)/go_project?charset=utf8&parseTime=True&loc=Local", // data source name
 		DefaultStringSize:         256,                                                                              // default size for string fields
 		DisableDatetimePrecision:  true,                                                                             // disable datetime precision, which not supported before MySQL 5.6
 		DontSupportRenameIndex:    true,                                                                             // drop & create when rename index, rename index not supported before MySQL 5.7, MariaDB
